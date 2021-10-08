@@ -1,0 +1,41 @@
+body{
+    background-color:darkslategray;
+    color:white;
+    padding-top:5%;
+    text-align:center;
+    font-size:25px;
+    font-family:'Roboto Mono';
+    word-wrap: break-word;
+}
+
+.logo{
+    width:275px;
+    height:275px;
+}
+
+.App{
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+}
+.WalletInfo{
+width:500px
+}
+
+.Block{
+    border:1px solid #fff;
+    padding:5%;
+    margin:2%;
+}
+
+.Transaction{
+    padding:5%;
+}
+
+a,a:hover{
+  color:red
+}
+
+.ConductTransaction, .TransactionPool{
+    margin:10%
+}
