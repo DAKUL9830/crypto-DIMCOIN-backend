@@ -6,10 +6,10 @@
   "scripts": {
     "test": "jest --watchAll",
     "dev-test": "nodemon dev-test",
-    "start": "npm run dev-client & node ./app",
-    "dev": "npm run dev-client & cross-env ENV='development' nodemon ./app",
+    "start": "node ./app",
+    "dev": "cross-env ENV='development' nodemon ./app",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon ./app",
-    "build-client": "parcel build client/src/index.html --out-dir client/dist"
+    "build-client": " parcel build client/src/index.html --out-dir client/dist"
     
     
   },
