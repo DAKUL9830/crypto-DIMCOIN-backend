@@ -7,6 +7,7 @@ class App extends Component{
     
     state={walletInfo:{}}
     componentDidMount(){
+        //fetch(`${document.location.origin}/wallet-info`)
         
         fetch(`${document.location.origin}/wallet-info`)
         .then(response => response.json())

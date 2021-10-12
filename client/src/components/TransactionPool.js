@@ -10,6 +10,7 @@ class TransactionPool extends Component{
  state={transactionPool:[]};
  fetchTransactionMap=()=>{
     fetch(`${document.location.origin}/transactions`)
+    //fetch('http://localhost:57152/transactions')
 .then(response => response.json())
 .then(json=>this.setState({transactionPool:json}));
 }

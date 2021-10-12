@@ -35086,6 +35086,7 @@ var App = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      //fetch(`${document.location.origin}/wallet-info`)
       fetch("".concat(document.location.origin, "/wallet-info")).then(function (response) {
         return response.json();
       }).then(function (json) {
@@ -50904,7 +50905,8 @@ var Blocks = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch("".concat(document.location.origin, "/blocks")).then(function (response) {
+      fetch("".concat(document.location.origin, "/blocks")) //fetch('http://localhost:57152/blocks')
+      .then(function (response) {
         return response.json();
       }).then(function (json) {
         return _this2.setState({
@@ -51790,7 +51792,8 @@ var TransactionPool = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "fetchTransactionMap", function () {
-      fetch("".concat(document.location.origin, "/transactions")).then(function (response) {
+      fetch("".concat(document.location.origin, "/transactions")) //fetch('http://localhost:57152/transactions')
+      .then(function (response) {
         return response.json();
       }).then(function (json) {
         return _this.setState({
@@ -52128,7 +52131,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53606" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

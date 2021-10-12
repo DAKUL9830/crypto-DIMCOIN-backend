@@ -7,7 +7,8 @@ const Wallet=require('../wallet');
 const TransactionPool=require('../wallet/transaction-pool');
 const Miner=require('./miner');
 //const { blockchainWallet } = require('../wallet');
-  const HTTP_PORT=process.env.HTTP_PORT||3001;
+  const isDevelopment=process.env.ENV=='development'
+  //const HTTP_PORT=process.env.HTTP_PORT||3001;
 
   const app=express();
   const tp=new TransactionPool()
@@ -38,7 +39,7 @@ app.post('/transact',(req,res)=>{
   const transaction =wallet.createTransaction(recipient,amount,bc,tp);
   p2pServer.broadcastTransaction(transaction)
   res.redirect('/transactions')
-  
+
 })
 
 app.get('/public-key',(req,res)=>{
@@ -58,7 +59,7 @@ app.get('/miner-transaction',(req,res)=>{
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'../client/dist/index.html'))
 });
-
+if(isDevelopment){
 const walletFoo=new Wallet();
 const walletBar=new Wallet();
 
@@ -87,7 +88,14 @@ for(let i=0;i<10;i++){
         walletBarAction();
     }
     miner.mine();
+  }
 }
-
-  app.listen(HTTP_PORT,()=>console.log(`Listening on port ${HTTP_PORT}`));
+let PEER_PORT;
+if (process.env.GENERATE_PEER_PORT === 'true') {
+    PEER_PORT = 3001 + Math.ceil(Math.random() * 1000);
+  }
+  const HTTP_PORT=process.env.HTTP_PORT||PEER_PORT||3001;
+  app.listen(HTTP_PORT,()=>console.log(`Listening on port ${HTTP_PORT}`)
+ 
+  );
   p2pServer.listen();
