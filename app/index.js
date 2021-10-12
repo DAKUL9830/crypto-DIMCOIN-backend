@@ -94,7 +94,7 @@ for(let i=0;i<10;i++){
 // if (process.env.GENERATE_PEER_PORT === 'true') {
 //     PEER_PORT = 3001 + Math.ceil(Math.random() * 1000);
 //   }
-  const HTTP_PORT=process.env.HTTP_PORT||3001;
+  const HTTP_PORT=process.env.PORT||3001;
   app.listen(HTTP_PORT,()=>console.log(`Listening on port ${HTTP_PORT}`)
  
   );
