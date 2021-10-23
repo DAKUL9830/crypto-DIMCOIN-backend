@@ -4,7 +4,13 @@ import {Link} from 'react-router-dom';
 import history from '../history';
 
 class ConductTransaction extends Component{
-    state={recipient:'',amount:0}
+    state={recipient:'',amount:0,knownAddresses:[]}
+
+    componentDidMount(){
+        fetch(`${document.location.origin}/known-addresses`)
+        .then(response=>response.json())
+        .then(json=>this.setState({knownAddresses:json}));
+    }
     upadateRecipient=event=>{
         this.setState({recipient:event.target.value});
      }
@@ -35,8 +41,24 @@ render(){
     
 
     return (
+
+             
+
         <div className='ConductTransaction'>
             <div><Link to='/'>HOME</Link></div>
+              <h2>KNOWN ADDRESSES</h2>
+              <br/>
+              {
+                  this.state.knownAddresses.map(knownAddress=>{
+                    return(
+            <div key={knownAddress}>
+                <div>{knownAddress}</div>
+                <br/>
+                </div>
+                    )
+                    })
+                }
+                <br/>
             <h1>CONDUCT TRANSACTION</h1>
             <FormGroup>
                <FormControl

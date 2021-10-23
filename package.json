@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev-test": "nodemon dev-test",
+    "dev-test": "nodemon dev-test", 
     "start": "npm run dev-client & node ./app",
     "dev": "npm run dev-client & cross-env ENV='development' nodemon ./app",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon ./app",

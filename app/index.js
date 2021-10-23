@@ -23,6 +23,24 @@ const Miner=require('./miner');
       res.json(bc.chain);
   })
 
+  app.get('/blocks/length',(req,res)=>{
+    res.json(bc.chain.length);
+})
+
+app.get('/blocks/:id',(req,res)=>{
+    const {id} =req.params;
+    const {length}= bc.chain;
+
+    const blockReversed =bc.chain.slice().reverse();
+    let startIndex= (id-1)*5;
+    let endIndex=id*5;
+
+    startIndex=startIndex<length?startIndex:length;
+    endIndex=endIndex<length?endIndex:length;
+
+    res.json(blockReversed.slice(startIndex,endIndex));
+})
+
   app.post('/mine',(req,res)=>{
       const block=bc.addBlock(req.body.data);
       console.log(`New block added ${block.toString()}`);
@@ -56,6 +74,28 @@ app.get('/miner-transaction',(req,res)=>{
     res.redirect('/blocks');
 })
 
+app.get('/known-addresses',(req,res)=>{
+    let addressMap=[];
+  
+    for(let block of bc.chain){
+        for(let transaction of block.data){
+            
+            console.log('transaction', transaction.outputs)
+               for (let recipient of transaction.outputs){
+                  addressMap.push(recipient);
+               
+               }
+        
+        }
+    }
+ 
+    permittedValues = [];
+    permittedValues=addressMap.map(function(address) {
+        return address.address;
+      });
+      let unique=[...new Set(permittedValues)]
+    res.json(unique);
+})
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'../client/dist/index.html'))
 });
@@ -75,7 +115,7 @@ const walletFooAction=()=>generateWalletTransaction({wallet:walletFoo,recipient:
 
 const walletBarAction=()=>generateWalletTransaction({wallet:walletBar,recipient:wallet.publicKey,amount:15,tp})
     
-for(let i=0;i<10;i++){
+for(let i=0;i<20;i++){
     if(i%3==0){
         walletAction();
         walletFooAction();
